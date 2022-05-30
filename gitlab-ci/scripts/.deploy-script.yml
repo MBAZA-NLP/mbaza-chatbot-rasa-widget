@@ -1,0 +1,39 @@
+
+# deploy
+
+deploy_nginx_dev:
+  extends: 
+   - .deploy
+   - .development_variables
+   - .rules_development_manual
+  variables:
+    DOCKER_COMPOSE_FILE: "docker-compose.yml"
+    DOCKER_SWARM: "mbaza-nginx"
+
+undeploy_nginx_dev:
+  extends: 
+   - .undeploy
+   - .development_variables
+   - .rules_development_manual
+  variables:
+    DOCKER_SWARM: "mbaza-nginx"
+
+
+deploy_full_stack_staging:
+  extends: 
+   - .deploy
+   - .staging_variables
+   - .rules_staging_manual
+  variables:
+    DOCKER_COMPOSE_FILE: "docker-compose.staging.yml"
+    DOCKER_SWARM: "mbaza-nginx"
+
+undeploy_full_stack_staging:
+  extends: 
+   - .undeploy
+   - .staging_variables
+   - .rules_staging_manual
+  variables:
+    DOCKER_SWARM: "mbaza-nginx"
+
+

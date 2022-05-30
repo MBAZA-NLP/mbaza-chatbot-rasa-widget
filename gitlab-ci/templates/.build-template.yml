@@ -1,0 +1,28 @@
+# templates for build
+
+.build:
+  stage: build
+  image: docker:20
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - echo $PWD
+    - ls
+    - $COMMAND
+    - docker build -t $NGINX -f Dockerfile .
+    - docker push $NGINX
+  
+
+.build_app:
+  stage: build_app
+  image: node:14.17.3
+  script:
+    - $COMMAND
+    - yarn install
+    - yarn build
+  artifacts:
+    expire_in: 1h
+    paths:
+      - dist/
+  cache:
+    paths:
+      - dist/

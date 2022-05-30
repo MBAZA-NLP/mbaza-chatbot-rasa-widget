@@ -1,0 +1,35 @@
+# templates for cleanup
+.tests:
+  stage: test
+  dependencies:
+    - install
+  script:
+    - npm install
+    - npm run test
+
+
+.tests_end_to_end:
+  stage: test
+  dependencies:
+     - install 
+  script:
+    - npm install
+    - npm run test:e2e
+
+.sonarqube-check:
+  stage: test
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  script:
+    - sonar-scanner -Dsonar.qualitygate.wait=true
+  allow_failure: false
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  only:
+    - development

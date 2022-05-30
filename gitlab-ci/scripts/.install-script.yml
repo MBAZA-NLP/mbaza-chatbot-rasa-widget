@@ -1,0 +1,5 @@
+.install_dev:
+  extends: 
+    - .install
+    - .development_gitlab_runner
+    - .rules_development

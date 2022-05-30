@@ -1,0 +1,17 @@
+build_app_dev:
+  extends:
+    - .build_app
+    - .development_variables
+    - .rules_development
+  variables:
+    COMMAND: "/bin/sh environment/$CI_COMMIT_BRANCH/script.sh"
+  
+  
+build_app_staging:
+  extends:
+    - .build_app
+    - .staging_variables
+    - .rules_staging
+  variables:
+    COMMAND: "/bin/sh environment/$CI_COMMIT_BRANCH/script.sh"
+  

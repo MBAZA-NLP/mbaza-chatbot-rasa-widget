@@ -1,0 +1,8 @@
+stages:
+  - build_app
+  #- test
+  - build
+  - deploy
+  - undeploy
+  - maintain
+  

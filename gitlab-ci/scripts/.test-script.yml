@@ -1,0 +1,22 @@
+# cleanup
+
+.test_dev:
+  extends: 
+    - .tests
+    - .default_docker
+    - .development_gitlab_runner
+    - .rules_development
+
+.end_to_end_test_dev:
+  extends: 
+    - .tests_end_to_end
+    - .default_docker
+    - .development_gitlab_runner
+    - .rules_development
+
+.test_staging:
+  extends: 
+    - .tests
+    - .default_docker
+    - .staging_gitlab_runner
+    - .rules_staging

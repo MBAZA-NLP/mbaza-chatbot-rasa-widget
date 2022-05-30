@@ -1,0 +1,7 @@
+.migrate:
+  stage: maintain
+  image: $KBA
+  script:
+    - npm run migration:run
+  allow_failure: true
+  dependencies: []

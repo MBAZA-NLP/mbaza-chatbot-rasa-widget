@@ -1,0 +1,21 @@
+build_nginx_dev:
+  extends: 
+    - .build
+    - .development_gitlab_runner
+    - .rules_development
+  dependencies:
+    - build_app_dev
+  variables:
+    COMMAND: "/bin/sh environment/$CI_COMMIT_BRANCH/script.sh"
+
+build_nginx_staging:
+  extends: 
+    - .build
+    - .staging_gitlab_runner
+    - .rules_staging
+  dependencies:
+    - build_app_staging
+  variables:
+    COMMAND: "/bin/sh environment/$CI_COMMIT_BRANCH/script.sh"
+
+  

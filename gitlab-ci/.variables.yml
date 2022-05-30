@@ -1,0 +1,76 @@
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  NGINX: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG/nginx:latest
+
+#  Using internal Gitlab
+#  REGISTRY: $CI_REGISTRY
+#  REGISTRY_SLAG:
+#  REGISTRY_USER: $CI_REGISTRY_USER
+#  REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
+#
+# Trigger variables will test if the environment is available 
+# and trigger jobs only if the environment is up
+# trigger variables are the host names of docker hosts in capital letters
+# Default set to offline - the first job will set it to true if environment is available
+# This is needed for testing purpose in dev environments which can be down
+#
+#
+# settings for pipeline build
+#
+# target environment will be set by initial environment check jobs
+# and is empty at beginning
+  TARGET_ENVIRONMENT: MBAZA
+  PIPELINE_TYPE: default
+
+#
+# Name of the configuration file for environment variables used in docker
+  ENV_FILE: .env-default
+
+.default_docker:
+  image:
+    name: node:14.17.3
+
+.development_variables:
+  environment:
+    name: development-$TARGET_ENVIRONMENT
+  tags:
+    - linodes
+    - dev
+    - docker
+    - mbaza
+    - rasa
+
+.development_gitlab_runner:
+  environment:
+    name: development-$TARGET_ENVIRONMENT
+  tags:
+    - linodes
+    - dev
+    - docker
+    - gitlab-agent
+
+.staging_variables:
+  tags:
+    - linodes
+    - test
+    - docker
+    - mbaza
+    - rasa
+  environment:
+    name: staging-$TARGET_ENVIRONMENT 
+
+.staging_gitlab_runner:
+  tags:
+    - linodes
+    - test
+    - docker
+    - gitlab-agent
+  environment:
+    name: staging-$TARGET_ENVIRONMENT 
+
+.production_variables:
+  tags:
+    - production
+  environment:
+    name: production-$TARGET_ENVIRONMENT 
+

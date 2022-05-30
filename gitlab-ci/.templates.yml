@@ -1,0 +1,9 @@
+  # templates for target envíronment
+include:
+  - local: '/gitlab-ci/templates/.install-template.yml'
+  - local: '/gitlab-ci/templates/.build-template.yml'
+  - local: '/gitlab-ci/templates/.deploy-template.yml'
+  - local: '/gitlab-ci/templates/.test-template.yml'
+  - local: '/gitlab-ci/templates/.maintain-template.yml'
+
+

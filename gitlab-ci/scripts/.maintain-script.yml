@@ -1,0 +1,11 @@
+.migrate_db_dev:
+  extends:
+    - .migrate
+    - .development_variables
+    - .rules_development_manual
+
+.migrate_db_staging:
+  extends:
+    - .migrate
+    - .staging_variables
+    - .rules_staging_manual

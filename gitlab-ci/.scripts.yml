@@ -1,0 +1,7 @@
+
+include:
+  - local: '/gitlab-ci/scripts/.build-app-script.yml'
+  - local: '/gitlab-ci/scripts/.build-script.yml'
+  - local: '/gitlab-ci/scripts/.test-script.yml'
+  - local: '/gitlab-ci/scripts/.deploy-script.yml'
+  - local: '/gitlab-ci/scripts/.maintain-script.yml'
